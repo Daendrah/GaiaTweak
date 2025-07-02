@@ -1,0 +1,249 @@
+<div class="sidebar-container two-level">
+  <div class="sidebar-level sidebar-level-buttons">
+    <button *ngFor="let section of sections" class="sidebar-button"
+      [class.selected]="selectedSection?.key === section.key" (click)="onButtonClick(section.key)"
+      [title]="section.label">
+      <ng-container [ngSwitch]="section.icon">
+        <svg *ngSwitchCase="'skybox'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.5">
+          <path d="M12 2l8 4v12l-8 4-8-4V6l8-4z" />
+          <path d="M12 2v20" />
+          <path d="M4 6l8 4" />
+          <path d="M20 6l-8 4" />
+          <circle cx="7" cy="9" r="0.5" fill="currentColor" />
+          <circle cx="16" cy="8" r="0.5" fill="currentColor" />
+          <circle cx="17" cy="12" r="0.5" fill="currentColor" />
+          <circle cx="8" cy="15" r="0.5" fill="currentColor" />
+        </svg>
+        <svg *ngSwitchCase="'lightning'" width="20" height="20" viewBox="0 -960 960 960" fill="none"
+          stroke="currentColor" stroke-width="40">
+          <path
+            d="M400-240q-33 0-56.5-23.5T320-320v-50q-57-39-88.5-100T200-600q0-117 81.5-198.5T480-880q117 0 198.5 81.5T760-600q0 69-31.5 129.5T640-370v50q0 33-23.5 56.5T560-240H400Zm0-80h160v-92l34-24q41-28 63.5-71.5T680-600q0-83-58.5-141.5T480-800q-83 0-141.5 58.5T280-600q0 49 22.5 92.5T366-436l34 24v92Zm0 240q-17 0-28.5-11.5T360-120v-40h240v40q0 17-11.5 28.5T560-80H400Zm80-520Z" />
+        </svg>
+        <svg *ngSwitchCase="'terrain'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="1.5">
+          <path d="M12 2l3 2v3l-3 2-3-2V4l3-2z" />
+          <path d="M6 8l3 2v3l-3 2-3-2v-3l3-2z" />
+          <path d="M18 8l3 2v3l-3 2-3-2v-3l3-2z" />
+          <path d="M12 14l3 2v3l-3 2-3-2v-3l3-2z" />
+          <path d="M12 7v2" />
+          <path d="M9 9l1.5 1" />
+          <path d="M15 9l-1.5 1" />
+          <path d="M12 12v2" />
+        </svg>
+      </ng-container>
+    </button>
+    <button *ngIf="selectedSection" class="hide-panel-btn" (click)="hidePanel()" title="Hide panel">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+  </div>
+  <div class="sidebar-level sidebar-level-content" *ngIf="selectedSection">
+    <div class="sidebar-section-title">{{ selectedSection.label }}</div>
+    <div class="sidebar-section-params">
+      <ng-container *ngIf="selectedSection.key === 'skybox'; else defaultParams">
+        <!-- Texture Size -->
+        <div class="sidebar-param">
+          <div class="sidebar-param-row" style="flex-wrap: wrap;">
+            <label>Texture Size</label>
+            <span>{{ skyboxParams.textureSize }}</span>
+            <input type="range" [min]="0" [max]="4" [step]="1" [value]="log2TextureSizeMinus7()"
+              (input)="onSkyboxParamChange('textureSize', $event, false, true)" />
+          </div>
+        </div>
+        <!-- Seed -->
+        <div class="sidebar-param">
+          <div class="sidebar-param-row" style="flex-wrap: wrap;">
+            <label>Seed</label>
+            <span>{{ skyboxParams.seed }}</span>
+            <input type="range" min="0" max="65535" step="1" [value]="skyboxParams.seed"
+              (input)="onSkyboxParamChange('seed', $event)" />
+          </div>
+        </div>
+        <!-- Background Section -->
+        <div class="sidebar-param">
+          <div class="sidebar-param-row">
+            <label>Background</label>
+            <span class="sidebar-switch">
+              <input type="checkbox" [checked]="skyboxParams.background?.enabled"
+                (change)="onSkyboxParamChange('background.enabled', $event)" />
+              <span class="sidebar-switch-slider"></span>
+            </span>
+          </div>
+          <ng-container *ngIf="skyboxParams.background?.enabled">
+            <div class="sidebar-param-row">
+              <label>Enable</label>
+              <input type="checkbox" [checked]="skyboxParams.background?.enabled"
+                (change)="onSkyboxParamChange('background.enabled', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Base Color</label>
+              <input type="color" [value]="rgbToHex(skyboxParams.baseColor)"
+                (change)="onSkyboxParamChange('baseColor', $event, true)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Noise Color</label>
+              <input type="color" [value]="rgbToHex(skyboxParams.background?.backgroundNoise?.color)"
+                (change)="onSkyboxParamChange('background.backgroundNoise.color', $event, true)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Noise Scale</label>
+              <input type="number" step="0.01" [value]="skyboxParams.background?.backgroundNoise?.scale"
+                (input)="onSkyboxParamChange('background.backgroundNoise.scale', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Noise Octave</label>
+              <input type="number" step="1" [value]="skyboxParams.background?.backgroundNoise?.octaves"
+                (input)="onSkyboxParamChange('background.backgroundNoise.octaves', $event)" />
+            </div>
+          </ng-container>
+        </div>
+        <!-- Stars Section -->
+        <div class="sidebar-param">
+          <div class="sidebar-param-row">
+            <label>Stars</label>
+            <span class="sidebar-switch">
+              <input type="checkbox" [checked]="skyboxParams.stars?.enabled"
+                (change)="onSkyboxParamChange('stars.enabled', $event)" />
+              <span class="sidebar-switch-slider"></span>
+            </span>
+          </div>
+          <ng-container *ngIf="skyboxParams.stars?.enabled">
+            <div class="sidebar-param-row">
+              <label>Density</label>
+              <input type="number" step="0.01" [value]="skyboxParams.stars?.density"
+                (input)="onSkyboxParamChange('stars.density', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Min Size</label>
+              <input type="number" step="0.01" [value]="skyboxParams.stars?.minSize"
+                (input)="onSkyboxParamChange('stars.minSize', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Max Size</label>
+              <input type="number" step="0.01" [value]="skyboxParams.stars?.maxSize"
+                (input)="onSkyboxParamChange('stars.maxSize', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Brightness</label>
+              <input type="number" step="0.01" [value]="skyboxParams.stars?.brightness"
+                (input)="onSkyboxParamChange('stars.brightness', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Color 1</label>
+              <input type="color" [value]="rgbToHex(skyboxParams.stars?.color1)"
+                (change)="onSkyboxParamChange('stars.color1', $event, true)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Color 2</label>
+              <input type="color" [value]="rgbToHex(skyboxParams.stars?.color2)"
+                (change)="onSkyboxParamChange('stars.color2', $event, true)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Foreground Density Multiplier</label>
+              <input type="number" step="0.01" [value]="skyboxParams.stars?.foregroundDensityMultiplier"
+                (input)="onSkyboxParamChange('stars.foregroundDensityMultiplier', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Foreground Size Multiplier</label>
+              <input type="number" step="0.01" [value]="skyboxParams.stars?.foregroundSizeMultiplier"
+                (input)="onSkyboxParamChange('stars.foregroundSizeMultiplier', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Foreground Brightness Multiplier</label>
+              <input type="number" step="0.01" [value]="skyboxParams.stars?.foregroundBrightnessMultiplier"
+                (input)="onSkyboxParamChange('stars.foregroundBrightnessMultiplier', $event)" />
+            </div>
+          </ng-container>
+        </div>
+        <!-- Nebula Section -->
+        <div class="sidebar-param">
+          <div class="sidebar-param-row">
+            <label>Nebula</label>
+            <span class="sidebar-switch">
+              <input type="checkbox" [checked]="skyboxParams.nebula?.enabled"
+                (change)="onSkyboxParamChange('nebula.enabled', $event)" />
+              <span class="sidebar-switch-slider"></span>
+            </span>
+          </div>
+          <ng-container *ngIf="skyboxParams.nebula?.enabled">
+            <div class="sidebar-param-row">
+              <label>Outer Color</label>
+              <input type="color" [value]="rgbToHex(skyboxParams.nebula?.outerColor)"
+                (change)="onSkyboxParamChange('nebula.outerColor', $event, true)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Inner Color</label>
+              <input type="color" [value]="rgbToHex(skyboxParams.nebula?.innerColor)"
+                (change)="onSkyboxParamChange('nebula.innerColor', $event, true)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Core Color</label>
+              <input type="color" [value]="rgbToHex(skyboxParams.nebula?.coreColor)"
+                (change)="onSkyboxParamChange('nebula.coreColor', $event, true)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Noise Scale</label>
+              <input type="number" step="0.01" [value]="skyboxParams.nebula?.noiseScale"
+                (input)="onSkyboxParamChange('nebula.noiseScale', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Noise Octave</label>
+              <input type="number" step="1" [value]="skyboxParams.nebula?.noiseOctave"
+                (input)="onSkyboxParamChange('nebula.noiseOctave', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Light Color</label>
+              <input type="color" [value]="rgbToHex(skyboxParams.nebula?.lightColor)"
+                (change)="onSkyboxParamChange('nebula.lightColor', $event, true)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Core Radius</label>
+              <input type="number" step="0.01" [value]="skyboxParams.nebula?.coreRadius"
+                (input)="onSkyboxParamChange('nebula.coreRadius', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Core Intensity</label>
+              <input type="number" step="0.01" [value]="skyboxParams.nebula?.coreIntensity"
+                (input)="onSkyboxParamChange('nebula.coreIntensity', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Raymarch Steps</label>
+              <input type="number" step="1" [value]="skyboxParams.nebula?.raymarchSteps"
+                (input)="onSkyboxParamChange('nebula.raymarchSteps', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Absorption</label>
+              <input type="number" step="0.01" [value]="skyboxParams.nebula?.absorption"
+                (input)="onSkyboxParamChange('nebula.absorption', $event)" />
+            </div>
+            <div class="sidebar-param-row">
+              <label>Scattering</label>
+              <input type="number" step="0.01" [value]="skyboxParams.nebula?.scattering"
+                (input)="onSkyboxParamChange('nebula.scattering', $event)" />
+            </div>
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-template #defaultParams>
+        <div *ngFor="let param of selectedSection.parameters" class="sidebar-param">
+          <div class="sidebar-param-row">
+            <label>{{ param.name }}</label>
+            <ng-container [ngSwitch]="param.type">
+              <input *ngSwitchCase="'range'" type="range" [min]="param.min" [max]="param.max" [step]="param.step || 0.01"
+                [value]="param.value" (input)="onParameterChange(param, $event)" />
+              <span *ngSwitchCase="'range'">{{ param.value }}</span>
+              <select *ngSwitchCase="'select'" [value]="param.value" (change)="onParameterChange(param, $event)">
+                <option *ngFor="let opt of param.options" [value]="opt">{{ opt }}</option>
+              </select>
+            </ng-container>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <button class="generate-button" (click)="generateSection(selectedSection)">
+      Generate {{ selectedSection.label }}
+    </button>
+  </div>
+</div>

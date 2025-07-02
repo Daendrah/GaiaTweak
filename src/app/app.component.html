@@ -1,0 +1,11 @@
+<div class="app-container">
+  <app-sidebar 
+    class="sidebar" 
+    [class.collapsed]="sidebarCollapsed"
+    (sidebarToggled)="onSidebarToggle($event)">
+  </app-sidebar>
+  <div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
+    <app-world-view class="world-view"></app-world-view>
+    <app-metrics-card class="metrics-card"></app-metrics-card>
+  </div>
+</div>
