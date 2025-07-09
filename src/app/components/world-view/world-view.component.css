@@ -1,22 +1,22 @@
 :host {
-  display: block;
-  width: 100%;
-  height: 100%;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 0;
-  transition: filter 0.3s ease;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    transition: filter 0.3s ease;
 }
 
 canvas:focus {
-  outline: none;
+    outline: none;
 }
 
 /* Subtle glow effect when canvas is active */
 :host:hover canvas {
-  filter: brightness(1.05);
+    filter: brightness(1.05);
 }
