@@ -1,0 +1,23 @@
+<div class="layer-toggle-panel" *ngIf="open">
+    <div class="panel-header">
+        <span>Layer Visibility</span>
+        <button class="close-btn" (click)="close.emit()" aria-label="Close panel">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="panel-body">
+        <div class="layer-row" *ngFor="let section of sections">
+            <span class="icon">
+                <ng-container *ngIf="section.icon">
+                    <ng-container *ngComponentOutlet="section.icon"></ng-container>
+                </ng-container>
+            </span>
+            <span class="label">{{ section.label }}</span>
+            <label class="switch">
+                <input type="checkbox" [checked]="section.active" (change)="toggleLayer(section)"
+                    aria-label="Toggle layer">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+</div>

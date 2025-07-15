@@ -1,0 +1,172 @@
+.notification-container-glass {
+    position: fixed;
+    bottom: var(--space-sm);
+    right: var(--space-md);
+    width: var(--notification-width, 340px);
+    z-index: 2000;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    pointer-events: none;
+    align-items: center;
+}
+
+.notification-glass {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--color-card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: var(--border);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    padding: var(--space-md) var(--space-xl);
+    width: 100%;
+    max-width: 380px;
+    min-width: 220px;
+    min-height: 48px;
+    color: var(--color-text-main);
+    font-family: var(--font-main);
+    font-size: var(--font-size);
+    pointer-events: auto;
+    opacity: 0.98;
+    transition: var(--transition);
+    animation: notif-fade-in 0.3s cubic-bezier(.4, 0, .2, 1);
+    margin-bottom: var(--space-xs);
+    box-sizing: border-box;
+    position: relative;
+    gap: var(--space-xs);
+}
+
+@keyframes notif-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.98);
+    }
+
+    to {
+        opacity: 0.98;
+        transform: none;
+    }
+}
+
+.notification-glass.success {
+    color: var(--color-success);
+}
+
+.notification-glass.error {
+    color: var(--color-error);
+}
+
+.notification-glass.progress {
+    color: var(--color-accent);
+}
+
+.notif-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    gap: var(--space-md);
+}
+
+.icon {
+    min-width: var(--icon-size);
+    min-height: var(--icon-size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: var(--space-xs);
+}
+
+.message {
+    flex: 1 1 auto;
+    margin-right: var(--space-xs);
+    white-space: normal;
+    overflow-wrap: break-word;
+    font-weight: 400;
+    font-size: var(--font-size);
+    letter-spacing: 0.01em;
+    color: var(--color-text-main);
+    margin-bottom: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+    color: var(--color-text-main);
+}
+
+.close-btn:hover {
+    background-color: var(--btn-hover-bg)
+}
+
+.notification-glass.success .icon mat-icon {
+    stroke: var(--color-success);
+}
+
+.notification-glass.error .icon mat-icon {
+    stroke: var(--color-error);
+}
+
+.notification-glass.progress .icon mat-icon {
+    stroke: var(--color-accent);
+    animation: spin 1.2s linear infinite;
+}
+
+.spin {
+    animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.progress-bar-container {
+    width: 100%;
+    background: rgba(163, 177, 198, 0.10);
+    border-radius: 6px;
+    height: 7px;
+    margin-top: 0.2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar {
+    background: var(--color-accent);
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.25s cubic-bezier(.4, 0, .2, 1);
+}
+
+.progress-label {
+    position: absolute;
+    right: 8px;
+    top: -18px;
+    font-size: var(--font-size-secondary);
+    color: var(--color-accent);
+    font-weight: 500;
+    pointer-events: none;
+    user-select: none;
+}
+
+@media (max-width: 600px) {
+    .notification-glass {
+        max-width: 98vw;
+        min-width: 0;
+        padding: 0.9rem 0.7rem;
+        font-size: 0.98rem;
+    }
+}

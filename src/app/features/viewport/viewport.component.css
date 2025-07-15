@@ -1,0 +1,17 @@
+:host {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    transition: filter 0.3s ease;
+}
+
+canvas:focus {
+    outline: none;
+}

@@ -1,0 +1,41 @@
+.nav-bar-layer-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.layer-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: none;
+    border: none;
+    color: var(--color-text-main);
+    font: inherit;
+    padding: 0.5em 1em;
+    border-radius: var(--button-radius, 8px);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.layer-btn .icon {
+    display: flex;
+    align-items: center;
+    font-size: 1.2em;
+}
+
+.layer-btn .label {
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.layer-btn.selected {
+    background: var(--color-accent, #005BEA);
+    color: var(--color-bg, #fff);
+}
+
+.layer-btn:hover {
+    background: var(--color-accent-hover, #003e99);
+    color: var(--color-bg, #fff);
+}

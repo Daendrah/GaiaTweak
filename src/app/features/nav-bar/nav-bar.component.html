@@ -1,0 +1,15 @@
+<nav class="nav-bar" aria-label="Top menu bar">
+    <div class="nav-bar-left">
+        <app-logo class="nav-bar-logo"></app-logo>
+        <span class="nav-bar-title">Gaia Tweak</span>
+        <span class="nav-bar-separator"></span>
+        <app-nav-bar-layer-buttons></app-nav-bar-layer-buttons>
+    </div>
+    <div class="nav-bar-actions">
+        <app-nav-bar-actions (generateAll)="onGenerateAll()" (reset)="onReset()"></app-nav-bar-actions>
+        <app-nav-bar-options (click)="onOptionsClick()"></app-nav-bar-options>
+        <app-nav-bar-help></app-nav-bar-help>
+        <app-fps-indicator></app-fps-indicator>
+    </div>
+</nav>
+<app-layer-toggle-panel [open]="togglePanelOpen" (close)="closeTogglePanel()"></app-layer-toggle-panel>

@@ -1,0 +1,65 @@
+/*
+  GaiaTweak — Design Tokens (CSS variables)
+*/
+
+:root {
+    /* ======= Palette ======= */
+    --color-card: rgba(20, 24, 32, 0.88);
+    --color-accent: #005BEA;
+    --color-accent-hover: #003e99;
+    --color-success: #2ED573;
+    --color-error: #FF4757;
+    --color-error-hover: #FF6B81;
+    --color-warning: #FFA502;
+    --color-text-main: #F5F6FA;
+    --color-text-secondary: #A3B1C6;
+    --color-border: rgba(255, 255, 255, 0.12);
+    --color-scrollbar: #2a2e38;
+    /* Light gray, lighter than --color-card */
+
+    /* ======= Glassmorphism ======= */
+    --radius: 6px;
+    /* Reduced for density */
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.28);
+    --blur: blur(18px) saturate(180%);
+    --border: 1px solid var(--color-border);
+    --transition: transform 0.18s cubic-bezier(.4, 0, .2, 1), opacity 0.18s cubic-bezier(.4, 0, .2, 1);
+
+    /* ======= Spacing Scale ======= */
+    --space-xs: 0.25rem;
+    /* 4px */
+    --space-sm: 0.5rem;
+    /* 8px */
+    --space-md: 0.75rem;
+    /* 12px */
+    --space-lg: 1rem;
+    /* 16px */
+    --space-xl: 1.5rem;
+    /* 24px */
+
+
+    /* ======= Top Bar ======= */
+    --nav-bar-height: 48px;
+    --nav-bar-z-index: 1000;
+    --nav-bar-radius: var(--radius);
+    --nav-bar-padding: 0 var(--space-lg);
+    --nav-bar-shadow: var(--shadow);
+    --nav-bar-blur: var(--blur);
+    --nav-bar-bg: var(--color-card);
+
+    /* ======= Buttons (global) ======= */
+    --btn-size: 28px;
+    --btn-bg: var(--color-card);
+    --btn-hover-bg: rgba(163, 177, 198, 0.10);
+    --btn-hover-shadow: 0 0 0 4px rgba(0, 91, 234, 0.18);
+
+    /* ======= Icon & Typography ======= */
+    --icon-size: 24px;
+    --font-main: 'Inter', 'Segoe UI', Arial, sans-serif;
+    --font-size: 15px;
+    --font-size-secondary: 0.92rem;
+    --font-size-heading: 1.08rem;
+
+    --config-width: 340px;
+    --notification-width: 420px;
+}

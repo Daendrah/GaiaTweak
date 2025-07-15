@@ -1,11 +1,8 @@
 <div class="app-container">
-  <app-sidebar 
-    class="sidebar" 
-    [class.collapsed]="sidebarCollapsed"
-    (sidebarToggled)="onSidebarToggle($event)">
-  </app-sidebar>
-  <div class="main-content" [class.sidebar-collapsed]="sidebarCollapsed">
-    <app-world-view class="world-view"></app-world-view>
-    <app-metrics-card class="metrics-card"></app-metrics-card>
-  </div>
+    <app-nav-bar></app-nav-bar>
+    <div class="main-content">
+        <app-viewport class="viewport"></app-viewport>
+    </div>
+    <app-notification-container></app-notification-container>
+    <app-layer-config-panel *ngIf="selectedLayer$ | async"></app-layer-config-panel>
 </div>

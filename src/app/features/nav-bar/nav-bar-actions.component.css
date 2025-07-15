@@ -1,0 +1,39 @@
+.nav-bar-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: none;
+    border: none;
+    color: var(--color-text-main);
+    font: inherit;
+    padding: 0.5em 1em;
+    border-radius: var(--button-radius, 8px);
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.action-btn-generate-all {
+    background: var(--color-accent);
+}
+
+.action-btn:hover {
+    background: var(--color-accent-hover, #2ecc40);
+    color: var(--color-bg, #fff);
+}
+
+.action-btn-reset:hover {
+    background: var(--color-error-hover, #2ecc40);
+    color: var(--color-bg, #fff);
+}
+
+.action-btn .label {
+    font-size: 1em;
+    font-weight: 500;
+}

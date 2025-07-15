@@ -1,69 +1,117 @@
-# GaiaTweak
+GaiaTweak
+=========
 
-GaiaTweak is a procedural skybox and world visualizer built with Angular and Three.js. It allows you to tweak parameters in real time to generate unique, beautiful skyboxes and lighting environments for your 3D scenes.
+**GaiaTweak** is a next-generation procedural world editor and generator, designed for creative professionals, technical artists, and developers who want to quickly prototype, visualize, and tweak rich 3D environments.
 
-## Features
+---
 
-- Real-time procedural skybox generation (background, stars, nebulae)
-- Interactive parameter sidebar for instant visual feedback
-- Built with Angular 20 and Three.js
-- Modern, responsive UI
-- Easily exportable for use in your own projects
+## What is GaiaTweak?
 
-## Getting Started
+GaiaTweak provides a modern, immersive dashboard UI to generate, combine, and customize multiple environment layers (sky, lighting, terrain, and more) in real time. It is built for speed, modularity, and creative exploration.
 
-### Development server
+---
 
-To start a local development server, run:
+## Key Features
 
-```bash
-ng serve
-```
+- **Layer-based Workflow**: Each environment aspect (sky, lighting, terrain, etc.) is a modular layer you can generate, enable/disable, and configure independently.
+- **Real-time 3D Viewport**: See your changes live in a performant, interactive 3D viewport.
+- **Modern UI/UX**: Minimal, dark-themed dashboard inspired by the best creative tools (Dribbble, Figma, etc.).
+- **Non-blocking Generation**: Generate or tweak any layer without freezing the app—workflows remain smooth and responsive.
+- **One-click World Generation**: Generate all layers at once, or randomize the entire scene.
+- **Presets & Save/Load**: Save your favorite setups and reload them instantly (coming soon).
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Layers & Parameters
 
-### Code scaffolding
+GaiaTweak is built around the concept of modular, procedural layers. Each layer can be generated, enabled/disabled, and customized independently. Here’s an overview of the main layers and their parameter groups:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Skybox Layer
+Procedurally generates the background sky, including stars and nebulae.
 
-```bash
-ng generate component component-name
-```
+**Parameter groups:**
+- **Base Color**: Main color of the sky background
+- **Background Noise**: Color, scale, octaves for subtle sky texture
+- **Stars**: Enable/disable, density, min/max size, brightness, two color gradients, foreground multipliers
+- **Nebula**: Enable/disable, outer/inner/core colors, noise scale/octave, light color, core radius/intensity, raymarch steps, absorption, scattering
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Lighting Layer
+Controls global illumination, sun, and ambient settings for your scene.
 
-```bash
-ng generate --help
-```
+**Parameter groups:**
+- **Sun**: Direction, color, intensity
+- **Ambient**: Color, intensity
+- **Shadows**: Enable/disable, softness, bias
 
-### Building
+### Terrain Layer
+Generates and edits procedural terrains with customizable parameters.
 
-To build the project run:
+**Parameter groups:**
+- **Heightmap**: Noise scale, octaves, seed
+- **Colors**: Gradient, elevation-based coloring
+- **Details**: Roughness, erosion, water level
 
-```bash
-ng build
-```
+### (Upcoming) Environment Layer
+Add global fog, atmospheric effects, and weather controls.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+**Parameter groups:**
+- **Fog**: Color, density, start/end distance
+- **Weather**: Type, intensity, animation
 
-### Running unit tests
+### (Upcoming) Clouds Layer
+Procedural volumetric or billboard clouds, with density and animation controls.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+**Parameter groups:**
+- **Cloud Type**: Volumetric/billboard
+- **Density**: Amount, scale
+- **Animation**: Speed, direction
 
-```bash
-ng test
-```
+### (Upcoming) Vegetation Layer
+Scatter and customize plants, trees, and ground cover procedurally.
 
-### Running end-to-end tests
+**Parameter groups:**
+- **Density**: Amount, distribution
+- **Types**: Tree/plant selection
+- **Variation**: Size, color, randomness
 
-For end-to-end (e2e) testing, run:
+### (Upcoming) Water Layer
+Add lakes, rivers, and oceans with real-time water simulation and material controls.
 
-```bash
-ng e2e
-```
+**Parameter groups:**
+- **Type**: Lake, river, ocean
+- **Color**: Shallow/deep, foam
+- **Waves**: Height, speed, direction
+- **Reflection/Refraction**: Intensity, blur
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-### Additional Resources
+## Roadmap & Upcoming Features
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- **Presets & Save/Load**: Save and reload your favorite setups
+- **Extensible Plugin System**: Add your own layers or generators
+- **Export**: Export generated assets for use in other engines or pipelines
+- **Multi-layer Editing**: Edit and preview several layers in parallel
+- **Collaboration**: Share and remix worlds with others (future)
+
+---
+
+## Why GaiaTweak?
+
+- **Fast iteration**: Instantly see the impact of your tweaks
+- **Creative freedom**: Mix and match layers, experiment, and discover new looks
+- **Scalable**: Designed to grow with your needs—add new layers, features, or integrations
+- **Open and documented**: (Coming soon) Full documentation and plugin API
+
+---
+
+## Screenshots & Demos
+
+*Coming soon!*
+
+---
+
+## Get Involved
+
+GaiaTweak is in active development. Feedback, feature requests, and contributions are welcome!
+
+For technical details, contribution guidelines, and developer documentation, see the [docs/](docs/) folder (coming soon).
+

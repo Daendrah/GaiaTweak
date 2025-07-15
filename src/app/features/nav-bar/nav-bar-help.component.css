@@ -1,0 +1,18 @@
+.help-btn {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    color: var(--color-text-main);
+    font: inherit;
+    padding: 0.5em;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    text-decoration: none;
+}
+
+.help-btn:hover {
+    background: var(--color-accent-hover, #2ecc40);
+    color: var(--color-bg, #fff);
+}
