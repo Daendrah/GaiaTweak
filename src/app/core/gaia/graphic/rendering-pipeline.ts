@@ -28,12 +28,13 @@ export class RenderingPipeline {
         this.renderer = new THREE.WebGLRenderer({ canvas, alpha: false, antialias: true });
         this.renderer.setSize(width, height);
         this.renderer.setPixelRatio(window.devicePixelRatio);
+        this.renderer.outputColorSpace = THREE.SRGBColorSpace;
         this.renderer.shadowMap.enabled = true;
         this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.renderer.toneMapping = THREE.NoToneMapping;
         this.renderer.toneMappingExposure = 1.0;
         this.renderer.shadowMap.autoUpdate = true;
-        
+
         const scene = world.getScene();
         const camera = world.getCamera();
 
